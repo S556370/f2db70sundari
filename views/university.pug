@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  h1= title
+  - var results = [{"University_Name": "Northwest Missouri State University", "Capacity":12000,"Location": "Maryville", "State": "Missouri", "Country":"USA"},{"University_Name": "California State University", "Capacity":480000,"Location": " Los Angeles", "State": "California", "Country":"USA"},{"University_Name": "Alabama State University", "Capacity":75000,"Location": "Montgomery", "State": "Alabama", "Country":"USA"}]
+  div.container-fluid 
+    div.row 
+        each item, index in results
+            div.col-sm-2(onclick=`buy(${index})`) University Name: #{item["University_Name"]} <br> Capacity: #{item["Capacity"]} <br> Location: #{item["Location"]} <br> State: #{item["State"]} <br> Country: #{item["Country"]}
+
+  script.
+    function buy(index) {
+      alert("You purchased item " + index)
+    }

@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  h1= title
+  p #{title} => An Intresting fact about me is, I can make any one as friend in very short span of time.
+  - var btnType = 'info'
+  - var btnSize = 'lg'
+
+  button(type='button', class=`btn btn-${btnType} btn-${btnSize}` onclick = "doBump()") Press Me
+
+  div#bump Bump the count
+
+
+
+  script.
+    var count = 0
+    var bump = 1
+    function doBump(){
+      count = count + bump
+      bump = bump + 1
+    document.getElementById("bump").innerHTML = " Count "+ count +" Bump "+bump;
+    }
+    
+
+    
