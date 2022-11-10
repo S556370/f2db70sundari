@@ -7,12 +7,11 @@ var mongodb = require('mongodb')
 
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var Universities = require("./models/university");
+var universities = require("./models/university");
 
 
 require('dotenv').config();
-const connectionString =
-  process.env.MONGO_CON
+const connectionString =  process.env.MONGO_CON
 mongoose = require('mongoose');
 mongoose.connect(connectionString,
   {
@@ -34,6 +33,7 @@ var usersRouter = require('./routes/users');
 var universityRouter = require('./routes/university');
 var gridBuildRouter = require('./routes/gridbuild');
 var selectorRouter = require('./routes/selector');
+var resourceRouter = require('./routes/resource');
 var app = express();
 
 // view engine setup
@@ -48,10 +48,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-
 app.use('/university', universityRouter);
 app.use('/gridbuild', gridBuildRouter);
 app.use('/selector', selectorRouter);
+app.use('/resource', resourceRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -74,13 +74,13 @@ app.use(function (err, req, res, next) {
 
 async function recreateDB() {
   // Delete everything	
-  await Universities.deleteMany();
+  await universities.deleteMany();
   let instance1 = new
-    Universities({ "University_Name": "Northwest Missouri State University", "Capacity": 12000, "Location": "Maryville", "State": "Missouri", "Country": "USA" });
+    universities({ "University_Name": "Northwest Missouri State University", "Capacity": 12000, "Location": "Maryville", "State": "Missouri", "Country": "USA" });
   let instance2 = new
-    Universities({ "University_Name": "California State University", "Capacity": 480000, "Location": " Los Angeles", "State": "California", "Country": "USA" });
+    universities({ "University_Name": "California State University", "Capacity": 480000, "Location": " Los Angeles", "State": "California", "Country": "USA" });
   let instance3 = new
-    Universities({ "University_Name": "Alabama State University", "Capacity": 75000, "Location": "Montgomery", "State": "Alabama", "Country": "USA" });
+    universities({ "University_Name": "Alabama State University", "Capacity": 75000, "Location": "Montgomery", "State": "Alabama", "Country": "USA" });
 
   instance1.save(function (err, doc) {
     if (err) return console.error(err);
