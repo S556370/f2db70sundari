@@ -49,8 +49,18 @@ exports.university_create_post = async function (req, res) {
     }
 };
 // Handle University delete form on DELETE.
-exports.university_delete = function (req, res) {
-    res.send('NOT IMPLEMENTED: universities delete DELETE ' + req.params.id);
+exports.university_delete = async function (req, res) {
+    // res.send('NOT IMPLEMENTED: universities delete DELETE ' + req.params.id);
+        console.log("delete " + req.params.id)
+        try {
+        result = await universities.findByIdAndDelete( req.params.id)
+        console.log("Removed " + result)
+        res.send(result)
+        } catch (err) {
+        res.status(500)
+        res.send(`{"error": Error deleting ${err}}`);
+        }
+       
 };
 // Handle University update form on PUT.
 exports.university_update_put = async function (req, res) {

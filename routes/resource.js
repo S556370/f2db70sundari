@@ -22,7 +22,7 @@ router.put('/universities/:id', university_controller.university_update_put);
 router.get('/universities/:id', university_controller.specific_university);
 
 // DELETE request to delete University.
-// router.delete('/universities/:id', university_controller.university_controller_delete);
+router.delete('/universities/:id', university_controller.university_delete);
 
 
 // GET request for list of all University items.
