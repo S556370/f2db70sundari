@@ -16,12 +16,14 @@ router.get('/', api_controller.api);
 // POST request for creating a University.
 router.post('/universities', university_controller.university_create_post);
 
+// PUT request to update University.
+router.put('/universities/:id', university_controller.university_update_put);
+// GET request for one University.
+router.get('/universities/:id', university_controller.specific_university);
+
 // DELETE request to delete University.
 // router.delete('/universities/:id', university_controller.university_controller_delete);
-// // PUT request to update University.
-// router.put('/universities/:id', university_controller.university_update_put);
-// // GET request for one University.
-// router.get('/universities/:id', university_controller.specific_university);
+
 
 // GET request for list of all University items.
 router.get('/universities', university_controller.universities_list);

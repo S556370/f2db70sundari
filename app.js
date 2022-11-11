@@ -76,11 +76,11 @@ async function recreateDB() {
   // Delete everything	
   await universities.deleteMany();
   let instance1 = new
-    universities({ "University_Name": "Northwest Missouri State University", "Capacity": 12000, "Location": "Maryville", "State": "Missouri", "Country": "USA" });
+    universities({ "University_Id":1,"University_Name": "Northwest Missouri State University", "Capacity": 12000, "Location": "Maryville", "State": "Missouri", "Country": "USA" });
   let instance2 = new
-    universities({ "University_Name": "California State University", "Capacity": 480000, "Location": " Los Angeles", "State": "California", "Country": "USA" });
+    universities({ "University_Id":2,"University_Name": "California State University", "Capacity": 480000, "Location": " Los Angeles", "State": "California", "Country": "USA" });
   let instance3 = new
-    universities({ "University_Name": "Alabama State University", "Capacity": 75000, "Location": "Montgomery", "State": "Alabama", "Country": "USA" });
+    universities({ "University_Id":3,"University_Name": "Alabama State University", "Capacity": 75000, "Location": "Montgomery", "State": "Alabama", "Country": "USA" });
 
   instance1.save(function (err, doc) {
     if (err) return console.error(err);

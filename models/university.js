@@ -1,5 +1,6 @@
 const mongoose = require("mongoose")
 const UniversitiesSchema = mongoose.Schema({
+    University_Id:Number,
     University_Name: String,
     Capacity: Number,
     Location: String,
