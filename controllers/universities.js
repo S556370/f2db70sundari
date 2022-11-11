@@ -33,7 +33,7 @@ exports.university_create_post = async function (req, res) {
      * and require that it be a json object
      * { "University_Name": "California State University", "Capacity": 480000, "Location": " Los Angeles", "State": "California", "Country": "USA" }
     */
-
+    document.University_Id = req.body.University_Id;
     document.University_Name = req.body.University_Name;
     document.Capacity = req.body.Capacity;
     document.Location = req.body.Location;
@@ -53,8 +53,28 @@ exports.university_delete = function (req, res) {
     res.send('NOT IMPLEMENTED: universities delete DELETE ' + req.params.id);
 };
 // Handle University update form on PUT.
-exports.university_update_put = function (req, res) {
-    res.send('NOT IMPLEMENTED: universities update PUT' + req.params.id);
+exports.university_update_put = async function (req, res) {
+    console.log(`update on id ${req.params.id} with body
+    ${JSON.stringify(req.body)}`)
+     try {
+     let toUpdate = await universities.findById(req.params.id)
+     // Do updates of properties
+     if(req.body.University_Id)  toUpdate.University_Id = req.body.University_Id;
+     if(req.body.University_Name) toUpdate.University_Name = req.body.University_Name;
+     if(req.body.Capacity) toUpdate.Capacity = req.body.Capacity;
+     if(req.body.Location)  toUpdate.Location = req.body.Location;
+     if(req.body.State) toUpdate.State = req.body.State;
+     if(req.body.Country) toUpdate.Country = req.body.Country;
+     
+     let result = await toUpdate.save();
+     console.log("Sucess " + result)
+     res.send(result)
+     } catch (err) {
+     res.status(500)
+     res.send(`{"error": ${err}: Update for id ${req.params.id}
+    failed`);
+     }
+    
 };
 exports.university_view_all_Page = async function (req, res) {
     try {
