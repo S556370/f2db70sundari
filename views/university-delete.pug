@@ -1,0 +1,60 @@
+extends layout 
+ 
+block content 
+  h1(class = 'container-fluid p-5 bg-success text-warning text-center')= title 
+ 
+  if (toShow == null) 
+    h2 No instance to delete 
+  else    
+    - let objectId = toShow._id
+    - let University_Id = toShow.University_Id
+    - let University_Name = toShow.University_Name 
+    - let Capacity = toShow.Capacity 
+    - let Location = toShow.Location 
+    - let State = toShow.State 
+    - let Country = toShow.Country 
+
+    - let actionid = "/resource/universities/" + objectId 
+    script let actionid = "#{actionid}" 
+    div(class="container text-center")
+      div(class='justify-content-center p-2 text-center text-dark',style='background-color:#ccffff') 
+        div.row 
+          div(class='p-2 flex-fill UniverrsityAttr mr-3') object Id  :  #{objectId} 
+        div.row 
+          div(class='p-2 flex-fill UniverrsityAttr mr-3') University Id  :  #{University_Id} 
+        div.row 
+          div(class='p-2 flex-fill UniverrsityAttr mr-3') University Name  : #{University_Name} 
+        div.row 
+          div(class='p-2 flex-fill UniverrsityAttr mr-3') Capacity  :  #{Capacity} 
+        div.row 
+          div(class='p-2 flex-fill UniverrsityAttr mr-3') Location  :  #{Location} 
+        div.row 
+          div(class='p-2 flex-fill UniverrsityAttr mr-3') State  :  #{State}
+        div.row 
+          div(class='p-2 flex-fill UniverrsityAttr mr-3') Country  :  #{Country}
+      div
+        button(class="btn btn-danger m-2" onclick="deleteOnId()") Delete 
+        button(class="btn btn-secondary m-2" onclick="cancel()") Cancel 
+ 
+  script. 
+    function cancel() { 
+      // Go back to the home page for the costume collection 
+      window.location.href='/university' 
+    } 
+  script. 
+    function deleteOnId() { 
+      console.log("starting delete") 
+      // delete first 
+      fetch(actionid, {         
+        method: 'DELETE'       
+      }).then((resp) => { 
+        return resp.json(); // or resp.text() or whatever the server sends 
+      }).then((body) => { 
+        alert("Delete succeded") 
+        window.location.href='/university' 
+        // TODO handle body 
+      }).catch((error) => { 
+        // TODO handle error 
+        alert("Delete failed " + error ) 
+      }); 
+    } 

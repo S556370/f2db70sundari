@@ -1,0 +1,49 @@
+extends layout 
+ 
+block content 
+  h1(class = 'container-fluid p-5 bg-success text-warning text-center')= title 
+ 
+  form(id='UniversityForm',class='justify-content-center p-2 bg-light text-center text-dark',action="/resource/universities", method="POST") 
+    div.form-group
+        label.UniverrsityAttr(for='University_Id' style="margin-right: 5px;") University ID
+        input#University_Id(type='number', name='University_Id' style="width:500px;")
+    br
+    div.form-group 
+        label.UniverrsityAttr(for='University_Name' style="margin-right: 5px;") University Name
+        input#University_Name(type='text', name='University_Name' style="width:500px;") 
+    br
+    div.form-group 
+        label.UniverrsityAttr(for='Capacity' style="margin-right: 5px;") Capacity
+        input#Capacity(type='number', name='Capacity' style="width:500px;") 
+    br
+    div.form-group 
+        label.UniverrsityAttr(for='Location' style="margin-right: 5px;") Location
+        input#Location(type='text', name='Location' style="width:500px;") 
+    br
+    div.form-group 
+        label.UniverrsityAttr(for='State' style="margin-right: 5px;") State
+        input#State(type='text', name='State' style="width:500px;")  
+    br
+    div.form-group 
+        label.UniverrsityAttr(for='Country' style="margin-right: 5px;") Country 
+        input#Country(type='text', name='Country' style="width:500px;")  
+    br
+    input(class="btn btn-success" type="submit") 
+ 
+  script. 
+    document.forms['UniversityForm'].addEventListener('submit', (event) => { 
+      event.preventDefault(); 
+      // TODO do something here to show user that form is being submitted 
+      fetch(event.target.action, { 
+        method: 'POST', 
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form 
+      }).then((resp) => { 
+        return resp.json(); // or resp.text() or whatever the server sends 
+      }).then((body) => { 
+        alert("Save succeded") 
+        // TODO handle body 
+      }).catch((error) => { 
+        // TODO handle error 
+        alert("Save failed " + error ) 
+      }); 
+    }); 

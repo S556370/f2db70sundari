@@ -3,7 +3,8 @@ var universities = require('../models/university');
 exports.universities_list = async function (req, res) {
     try {
         result = await universities.find();
-        res.send(result);
+        res.render('university', { title: 'universities Search Results', results: result });
+        // res.send(result);
     }
     catch (err) {
         res.status(500);
@@ -89,10 +90,71 @@ exports.university_update_put = async function (req, res) {
 exports.university_view_all_Page = async function (req, res) {
     try {
         let result = await universities.find();
-        res.render('universities', { title: 'universities Search Results', results: result });
+        res.render('university', { title: 'universities Search Results', results: result });
+        // res.send(result);
     }
     catch (err) {
         res.status(500);
         res.send(`{"error": ${err}}`);
     }
 };
+
+
+//Assignment-12
+
+// Handle a show one view with id specified by query
+
+exports.university_view_one_Page = async function (req, res) {
+    console.log("single view for id " + req.query.id)
+    try {
+      result = await universities.findById(req.query.id)
+      res.render('university-detail',
+        { title: 'university Detail', toShow: result });
+    }
+    catch (err) {
+      res.status(500)
+      res.send(`{'error': '${err}'}`);
+    }
+  };
+  
+  // Handle building the view for creating a university.
+  // No body, no in path parameter, no query.
+  // Does not need to be async
+  
+  exports.university_create_Page = function (req, res) {
+    console.log("create view")
+    try {
+        res.render('university-create', { title: 'university Create' });
+    }
+    catch (err) {
+        res.status(500)
+        res.send(`{'error': '${err}'}`);
+    }
+  };
+  // Handle building the view for updating a university.
+  // query provides the id
+  
+  exports.university_update_Page =  async function(req, res) {
+    console.log("update view for item "+req.query.id)
+    try{
+        let result = await universities.findById(req.query.id)
+        res.render('university-update', { title: 'university Update', toShow: result });
+    }
+    catch(err){
+        res.status(500)
+        res.send(`{'error': '${err}'}`);
+    }
+  };
+  // Handle a delete one view with id from query
+  
+  exports.university_delete_Page = async function(req, res) {
+    console.log("Delete view for id "  + req.query.id)
+    try{
+        result = await universities.findById(req.query.id)
+        res.render('university-delete', { title: 'university Delete', toShow: result });
+    }
+    catch(err){
+        res.status(500)
+        res.send(`{'error': '${err}'}`);
+    }
+  };
