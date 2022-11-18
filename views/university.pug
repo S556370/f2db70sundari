@@ -4,12 +4,25 @@ block content
   h1= title
   - var results = results
   //- - var results = [{ "University_Id": 1,"University_Name": "Northwest Missouri State University", "Capacity":12000,"Location": "Maryville", "State": "Missouri", "Country":"USA"},{ "University_Id": 2,"University_Name": "California State University", "Capacity":480000,"Location": " Los Angeles", "State": "California", "Country":"USA"},{ "University_Id": 3,"University_Name": "Alabama State University", "Capacity":75000,"Location": "Montgomery", "State": "Alabama", "Country":"USA"}]
-  div.container-fluid 
-    div.row 
-        each item, index in results
-            div.col-sm-2(onclick=`buy(${index})`) <br><br>_id: #{item["_id"]} <br>University Id: #{item["University_Id"]} <br> University Name: #{item["University_Name"]} <br> Capacity: #{item["Capacity"]} <br> Location: #{item["Location"]} <br> State: #{item["State"]} <br> Country: #{item["Country"]}
+  //- div.container-fluid 
+  //-   div.row 
+  //-       each item, index in results
+  //-           div.col-sm-2(onclick=`buy(${index})`) <br><br>_id: #{item["_id"]} <br>University Id: #{item["University_Id"]} <br> University Name: #{item["University_Name"]} <br> Capacity: #{item["Capacity"]} <br> Location: #{item["Location"]} <br> State: #{item["State"]} <br> Country: #{item["Country"]}
+
+  //- script.
+  //-   function buy(index) {
+  //-     alert("You purchased item " + index)
+  //-   }
+
+  div(class="container-fluid")
+    div(class="row m-1")
+        each item in results
+          - let destination = `dispatch(\"/pizza/update?id=${item["_id"]}\")`
+            div(class="row-sm-2", class="m-1") <br><br>_id: #{item["_id"]} <br>University Id: #{item["University_Id"]} <br> University Name: #{item["University_Name"]} <br> Capacity: #{item["Capacity"]} <br> Location: #{item["Location"]} <br> State: #{item["State"]} <br> Country: #{item["Country"]}<br>
+              button.btn( class="btn-primary ml-1", onclick= destination) Update
+
 
   script.
-    function buy(index) {
-      alert("You purchased item " + index)
+    function dispatch(path){
+      window.location.href=path
     }
