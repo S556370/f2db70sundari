@@ -17,7 +17,7 @@ block content
   div(class="container-fluid")
     div(class="row m-1")
         each item in results
-          - let destination = `dispatch(\"/pizza/update?id=${item["_id"]}\")`
+          - let destination = `dispatch(\"/university/update?id=${item["_id"]}\")`
             div(class="row-sm-2", class="m-1") <br><br>_id: #{item["_id"]} <br>University Id: #{item["University_Id"]} <br> University Name: #{item["University_Name"]} <br> Capacity: #{item["Capacity"]} <br> Location: #{item["Location"]} <br> State: #{item["State"]} <br> Country: #{item["Country"]}<br>
               button.btn( class="btn-primary ml-1", onclick= destination) Update
 
