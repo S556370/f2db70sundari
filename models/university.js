@@ -1,9 +1,9 @@
 const mongoose = require("mongoose")
 const UniversitiesSchema = mongoose.Schema({
     University_Id:Number,
-    University_Name: String,
+    University_Name: {type: String,required: [true, 'Name of the university cannot be empty']},
     Capacity: Number,
-    Location: String,
+    Location: {type: String,required: [true, 'location of the university cannot be empty']},
     State: String,
     Country: String
 })
